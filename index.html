@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    font-family: 'Gowun Batang', serif !important;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+    height: 100vh;
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+ 
+
+.Wrap {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0px auto;
+    position: relative;
+
+}
+video { width: 100%; }
+.blur {
+    width: 100%;
+    height: 100vh;
+    transition: all ease 2s 0s;
+}
+.popBtn {
+    width: 430px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    opacity: 0;
+    transition: all ease 2s 0s;
+}
+        /*popup*/
+.popup_layer {position:fixed;top:0;left:0;z-index: 10000; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); }
+/*팝업 박스*/
+.popup_box{position: relative;top:50%;left:50%; overflow: auto; width:698px;    height: 800px; transform:translate(-50%, -50%);z-index:1002;box-sizing:border-box;background:url(편지지_1.png);box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);-webkit-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);-moz-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);}
+/*컨텐츠 영역*/
+.popup_box .popup_cont {padding:50px;line-height:1.4rem;font-size:14px; }
+.popup_box .popup_cont h2 {padding:15px 0;color:#333;margin:0;}
+.popup_box .popup_cont p{ border-top: 1px solid #666;padding:40px 0;}
+
+/*오버레이 뒷배경*/
+.popup_overlay{position:fixed;top:0px;right:0;left:0;bottom:0;z-index:1001;;background:rgba(0,0,0,0.5);}
+/*popup*/
+
+  .popup_cont::-webkit-scrollbar {
+    width: 10px;
+  }
+  .popup_cont::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  .popup_cont::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+    </style>
+</head>
+<body>
+    <audio src="드뷔시-달빛.mp3"controls autoplay loop style="position: absolute; top: 0; z-index: 99;"></audio>
+    <div class="Wrap">
+        <div class="blur">
+            <video muted autoplay class="video">
+                <source src="writing.mp4" type="video/mp4">
+                <strong>Your browser does not support the video tag.</strong>
+              </video>
+            </div>
+            <a href="javascript:openPop()" class="popBtn">
+              <div>
+                  <img src="편지_1.png" alt="">
+              </div>
+          </a>
+    </div>
+
+
+    <div class="popup_layer" id="popup_layer" style="display: none;">
+      <div class="popup_box">
+          <div style="height: 10px; width: 375px; float: top;">
+            <!-- <a href="javascript:closePop();"><img src="/static/img/ic_close.svg" class="m_header-banner-close" width="30px" height="30px"></a> -->
+          </div>
+          <!--팝업 컨텐츠 영역-->
+          <div class="popup_cont">
+              <h5 style="font-size: 30px;padding-bottom: 40px;font-weight: 700;"> 친애하는 로웨나 필리스경 </h5>
+              <p style="font-size: 18px; line-height: 29px; word-break: keep-all;">
+                그대가 몇 번이나 잠자리를 지켜주고 입을 맞춰주었음에도 <br>
+                달이 중천에 뜬 지금까지 잠에 들지 못하는 것을 보면 아직 나의 지독한 불면증은 아직도 고쳐지지 않았나 보아.
+                <br><br>
+                잠에 들지 못하는 건 여느 때와 같은 일이었기에 새삼스러울 것은 없지만,<br>
+                그대가 곁에 있는 달콤함을 알아버린 까닭인지<br>
+                오늘따라 비어있는 옆자리가 유독 시리게 느껴지는군. 
+                <br><br>
+                보통 이렇게까지 잠을 설치는 밤엔 겉옷을 가볍게 걸치고 저택 정원을 산책하고 오거나<br>
+                평소에 즐겨 읽는 서책을 읽곤 하지만<br>
+                대신 오늘은 깃펜을 들어 그대에게 편지를 쓰기로 하였어.
+                <br><br> 
+                간혹 말로 내뱉는 언어들은 실체에 미치지 못하고, 내 의도와 달리 동떨어진 소통을 하게 될 때가 너무 많아서 말이지.<br>
+                특히 그대의 앞에 서면 쓸데없는 말과 행동이 튀어나와 불필요한 오해가 쌓이는 것 같기도 하고.<br>
+                아마 그대에게 냉대 당한 세월이 길었던 탓에 나도 모르게 긴장을 하는 것일지도 모르겠군.<br>
+                혹, 글로 적으면 좀 낫지 않을까 생각하여 한 번 써보겠네. 괜찮다면 이를 계기로 서신을 계속 나누는 것도 좋겠지.
+                <br><br>
+                어쨌든 나는 요즘 결혼을 준비하랴, 그대가 원한 재무공부도 하랴, 아주 정신 없는 삶을 보내고 있다네.<br>
+                그것 아는가? 난 아카데미에 다닐 때도 이렇게까지 공부하진 않았다네<br>
+                알시 필릭스에게 들었는지는 모르겠지만, 난 그다지 성실한 학생이 아니었거든.<br>
+                아카데미를 다닐 땐 리제르바가 아닌 외가쪽 가문에서 머물었던 기간도 길었었고<br>
+                리제르바에 내 성적에 대한 통보는 갔었으나 당시엔 집안에서도 내 성적에 대해 신경 쓰지 않았었으니 그래, 그때엔 자유분방하게 지냈었지.<br><br>
+                당시 공부를 안 했던 업보가 이렇게 돌아올 줄 알았다면 그 당시에도 조금은 해둘 것을 그랬나 봐, 요즘 엄청나게 힘들군 그래.<br><br>
+                그래도... 그대같이 고귀한 여자와 결혼하기 위해서 내가 못할 게 어디있겠나? 열심히는 하겠지만 그냥 투정 좀 부려보는 것이네. 알지?<br>
+                사적인 편지에는 원래 이런 것도 쓰는 법이니, 귀엽게 봐주게나.<br><br>
+                내 학창시절을 반목하다보니 그대는 어떤 학생이었는지 궁금해지는군. 뭐 사실 묻지 않아도 그대의 학창시절은 마치 눈 앞에서 목도한 듯 빤히 그려지는 것이지만...<br>
+                혹, 그대가 내게 답장을 준다면 그대의 아카데미 시절 에피소드와 함께 당시의 초상화라도 있으면 한 장 보내주었으면 하네.<br>
+                약혼자니까 그정도는 부탁하여도 괜찮겠지?
+                <br><br>
+                어찌되었건 요즘 공부로 혼이 쏙 빠지게 지루하고 따분한 일상이 된 것을 제외하면 난 요즘 잘 지내고 있네.<br>
+                가문의 집사는 내가 공부하는 것에 대해 눈물을 내비칠 정도로 기뻐하고, 친인척들도 내 변화를 달갑게 생각하더군.<br>
+                단 하나 귀찮아진 점이 있다면.....<br><br>
+                ....그대의 가문에선 혼약에 대한 별 이야기는 없었나? 사실 우리 가문에서는 꽤 반대의 목소리가 높아서 말일세.<br><br>
+                아무래도 현직 공작이 다른 가문의 부마로 들어간다는 것은 노친네들에겐 파격적인 행보일테니까... 예상은 했네.<br>
+                결혼식에는 차질 없게 잠재워놓을테니 그대는 걱정할 필요 없어.<br><br>
+                ...그런데 선대가 이미 작고한 상태인 나와 달리 그대는 아직 아버지인 필릭스 공작이 살아있으니, 음...<br><br>
+                <span style="font-style: italic;">(망설이는 듯 펜촉을 길게 끈 흔적.)</span><br><br>
+                필시.. 날 달갑게 생각하진 않겠지.<br>
+                ....그대는 아버지와 사이가 좋았던 것 같은데, 반대한다고해도 혼약을 파기할 생각은 없겠지?<br>
+                말해두겠지만, 이미 벌려진 판이네. 만일 그대가 이 약속을 무른다면<br> <br><br><br>
+                <span style="font-style: italic;">(써냈다가 지운 자국들. 오랜 상흔처럼 겹쳐, 원문을 알아볼 수 없다.)</span>
+                <br><br><br><br>
+                그대가 알아서 잘 처신할 것이라고 믿고 있네.<br><br>
+                ....그나저나 그거 아는가? 지금 내 책상 위에 그대가 준 선물이 그대로 놓여있네.<br>
+                그대가 담아준 상자에 펜던트도 놓여져 있고, 꽃은 마법으로 방부처리하여 돔 형태의 유리관을 씌워놓았어.<br>
+                그대도 그때 내가 준 꽃을 시들지 않게 그렇게 했었잖나? 후후, 좋은 생각인 듯 하여 나도 따라했지.<br><br>
+                아직도 내가 준 꽃은 시들지 않았는가?<br>
+                시들었다면 이번엔 좀 더 크고, 화려하고, 아름다운 꽃다발로 다시 줄 생각이니 혹 시들었다면 버리도록 하게나.<br>
+                그대의 책상에 시든 꽃은 어울리지 않아. 내 그대의 책상엔 언제나 생기있고 향 좋은 싱싱한 꽃만을 올려두고 싶네.<br>
+                결혼하게 된다면, 침실의 화병엔 내가 가져온 꽃으로 매일 바꿔 꽂아둘 것이야. 아주 새빨간 종류의 꽃들로<br><br>
+                그러고 보니 그대는 새빨간 장미를 좋아해?<br>
+                내게 준 것도 그런 장미꽃이라서 갑자기 궁금해지는군.<br>
+                만일 좋아한다면 장미의 향이 마음에 드는 것인지, 아니면 그 의미가 마음에 드는 것인지, 그 붉음이 마음에 드는 것인지 궁금해.<br>
+                개인적으로는 그대의 취향이 빨간 것들이었으면 좋겠는걸.<br><br>
+                아... 선물에 대해 얘기하다보니 갑자기 그게 생각나는군. 그대가 그 때 했던 말 기억나나? 우리가 연인이 아니라고 했던 말.<br>
+                사실 그래서 그대에게 선물을 기대 하고 있지 않았었어. 그런데 갑자기 선물을 줘서 굉장히 놀랐지. 무슨 의미인지도 궁금하고..<br><br>
+                <span style="font-style: italic;">(펜촉을 길게 끈 흔적.) </span><br><br>
+                ... 내게 선물을 준 것은 앞으로 혼인을 하게 될 약혼남에 대한 의리로 준 것인가, 아니면 그저 그대의 변덕인건가? 그것도 아니라면...<br><br>
+                .<br>
+                .<br>
+                .<br>
+                <span style="font-style: italic;">(톡,톡,톡 펜을 두드린 듯한 비정형적인 잉크자국이 남아있고 그 뒤로 상당한 공백이 이어진다)</span>
+                <br><br><br><br><br>
+                아니.... 바보 같은 질문이군. 잊어주게나. 글로 쓴다면 좀 더 정돈되게 그대에게 내 말을 전할 수 있을 것이라 생각하였는데 그렇지도 않은 모양이야.<br><br>
+                어쩌면 말로 하는 게 더 나을지도 모르겠군.<br><br>
+                조만간 필리스 가문을 또 방문할까 하네. 별다른 이유는 없고, 그냥 보고싶어서.<br>
+                갑작스러운 방문이겠으나, 난 그대의 약혼남이니 반갑게 맞이해 줄 것이지?<br><br>
+                이 편지를 들고 만나는 것을 기대하며, 후의 말은 이만 줄이겠네.<br>
+                만나서 얘기하도록 하지.<br>
+              </p>
+              <h5 style="font-size: 25px; text-align: right; padding-top: 30px; border-top: 1px solid #666;font-weight: 700;"> 셰이퍼 A.리제르바. </h5>
+
+              <span style="width: 100%;margin-top: 30px;text-align: right;display: block;">추신: 그런데 생각해보니 그대와 정식으로 데이트를 해 본 적은 없는 것 같은데,<br> 조만간 함께 놀러 나가는 것은 어떠한가? <br>편지 다 읽으면 대답 주게나.</span>
+          <!--팝업 버튼 영역-->
+          <div class="popup_btn" style=" margin-top: 100px;text-align: center;">
+            <a href="javascript:closePop();">닫기</a>
+        </div>
+          </div>
+      </div>
+    <script>
+        //팝업 띄우기
+        function openPop() {
+            document.getElementById("popup_layer").style.display = "block";
+
+        }
+
+        //팝업 닫기
+        function closePop() {
+            document.getElementById("popup_layer").style.display = "none";
+        }
+
+        setInterval(function(){
+            if($(".video").prop("ended")){
+            //영상종료 후 진행할 함수 입력부분
+            $(".video").css({"display":"none"});
+            $(".blur").css({"background":"url(writing.jpg)","filter": "blur(10px)"}); 
+            $(".popBtn").css({"opacity":"100","display":"block"});
+            }
+        },200);
+    </script>
+</body>
+</html>
